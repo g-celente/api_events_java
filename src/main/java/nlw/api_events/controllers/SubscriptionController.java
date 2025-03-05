@@ -6,6 +6,7 @@ import nlw.api_events.dto.SubscriptionResponse;
 import nlw.api_events.exception.NotFoundException;
 import nlw.api_events.exception.SubscriptionExistingException;
 import nlw.api_events.model.User;
+import nlw.api_events.producer.UserProducer;
 import nlw.api_events.service.SubscriptionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
