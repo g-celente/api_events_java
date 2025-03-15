@@ -1,11 +1,8 @@
 package nlw.api_events.producer;
 
-import lombok.AllArgsConstructor;
-import nlw.api_events.dto.EmailDto;
+import nlw.api_events.dto.validation.EmailDto;
 import nlw.api_events.model.Subscription;
-import nlw.api_events.model.User;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package nlw.api_events.service;
 
 import lombok.AllArgsConstructor;
-import nlw.api_events.dto.SubscriptionResponse;
+import nlw.api_events.dto.common.SubscriptionResponse;
 import nlw.api_events.exception.NotFoundException;
 import nlw.api_events.exception.SubscriptionExistingException;
 import nlw.api_events.model.Event;
@@ -11,6 +11,7 @@ import nlw.api_events.producer.UserProducer;
 import nlw.api_events.repository.event.EventRepository;
 import nlw.api_events.repository.subscription.SubscriptionRepository;
 import nlw.api_events.repository.user.UserRepository;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,7 +28,7 @@ public class SubscriptionService {
         Event event = eventRepository.findByPrettyName(event_name);
 
         if (event == null) {
-            throw new NotFoundException("Evento "+event_name+ " não existe");
+            throw new NotFoundException("Evento "+event_name+" não existe");
         }
 
         User userRec = userRepository.findByEmail(user.getEmail());
@@ -42,10 +43,6 @@ public class SubscriptionService {
 
         if (userId != null) {
             User indication = userRepository.findById(userId).orElse(null);
-
-            if (indication == null) {
-                throw new NotFoundException("O usuário com id "+userId+ "não foi encontrado");
-            }
 
             subscription.setIndication(indication);
         }

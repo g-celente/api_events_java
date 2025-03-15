@@ -1,4 +1,4 @@
-package nlw.api_events.dto;
+package nlw.api_events.dto.validation;
 
 
 import lombok.Getter;
