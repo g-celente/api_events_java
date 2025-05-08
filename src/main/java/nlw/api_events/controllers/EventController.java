@@ -20,9 +20,19 @@ public class EventController {
     private final EventService service;
 
     @GetMapping
-    public ResponseEntity<List<Event>> index() {
+    public ResponseEntity<List<Event>> index(@RequestParam(required = false) String themes) {
         try {
-            List<Event> events = service.gettAllEvents();
+            List<Event> events;
+
+            if (themes != null && !themes.isEmpty()) {
+                // Se o parâmetro 'themes' estiver presente, você pode dividir a string e usar esses temas
+                String[] themeArray = themes.split(",");
+                events = service.getEventsByThemes(themeArray); // Modificar o serviço para lidar com temas
+            } else {
+                // Caso não tenha o parâmetro 'themes', retorna todos os eventos
+                events = service.gettAllEvents();
+            }
+
             return ResponseEntity.ok(events);
         } catch (Exception e) {
             throw new RuntimeException(e);

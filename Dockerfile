@@ -1,5 +1,5 @@
 # Usar o JDK 23
-FROM openjdk:23-jdk-slim
+FROM openjdk:21-jdk-slim
 
 # Define o diretório de trabalho
 WORKDIR /app

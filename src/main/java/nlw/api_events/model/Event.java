@@ -24,6 +24,9 @@ public class Event {
     @Column(name = "pretty_name", length = 50, nullable = false, unique = true)
     private String prettyName;
 
+    @Column(name = "theme", length = 70, nullable = false)
+    private String theme;
+
     @Column(name = "location", length = 255, nullable = false)
     private String location;
 
@@ -112,5 +115,13 @@ public class Event {
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 }

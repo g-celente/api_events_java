@@ -48,4 +48,12 @@ public class EventService {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Event> getEventsByThemes(String[] themes) {
+        // Convertendo o array de temas para uma lista
+        List<String> themeList = List.of(themes);
+
+        // Buscando os eventos pelo repositório com base nos temas
+        return repository.findByThemes(themeList);
+    }
 }

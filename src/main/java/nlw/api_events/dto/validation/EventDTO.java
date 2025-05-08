@@ -10,6 +10,7 @@ public record EventDTO (
         @NotBlank String title,
         @NotBlank String prettyName,
         @NotBlank String location,
+        @NotBlank String theme,
         @NotNull Double price,
         @NotNull LocalDate startDate,
         @NotNull LocalDate endDate
@@ -19,6 +20,7 @@ public record EventDTO (
         Event event = new Event();
         event.setTitle(this.title);
         event.setPrettyName(this.prettyName);
+        event.setTheme(this.theme);
         event.setLocation(this.location);
         event.setPrice(this.price);
         event.setStartDate(this.startDate);

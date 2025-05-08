@@ -7,6 +7,7 @@ import nlw.api_events.exception.SubscriptionExistingException;
 import nlw.api_events.model.Event;
 import nlw.api_events.model.Subscription;
 import nlw.api_events.model.User;
+import nlw.api_events.producer.SubscriptionProducer;
 import nlw.api_events.producer.UserProducer;
 import nlw.api_events.repository.event.EventRepository;
 import nlw.api_events.repository.subscription.SubscriptionRepository;
@@ -21,7 +22,8 @@ public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
-    private final UserProducer producer;
+    private final UserProducer userProducer;
+    private final SubscriptionProducer subscriptionProducer;
 
     public SubscriptionResponse newSubscription(String event_name, User user, Integer userId) {
 
@@ -54,7 +56,9 @@ public class SubscriptionService {
         }
 
         Subscription res = subscriptionRepository.save(subscription);
-        producer.publishMessage(res);
+        userProducer.publishMessage(res);
+        subscriptionProducer.sendEventSubscription(res);
+
         return  new SubscriptionResponse(res.getId(), "http://codecraft.com/"+res.getEvent().getPrettyName()+"/"+res.getSubscriber().getId());
     }
 
